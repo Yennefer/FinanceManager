@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    // Colors for sum
+    <color name="coral">#FF4040</color>
+    <color name="yellow_green">#93AA00</color>
+
+    // Colors for icons
+    <color name="orange">#FF7538</color>
+    <color name="light_tangerine">#FFA812</color>
+    <color name="tomato">#FF6347</color>
+    <color name="yandex">#FFCC00</color>
+    <color name="antique_pink">#D36E70</color>
+    <color name="carmine_pink">#EB4C42</color>
+    <color name="mulberry">#C54B8C</color>
+    <color name="mango_tango">#FF8243</color>
+    <color name="dandelion">#FDDB6D</color>
+    <color name="canary">#FFFF99</color>
+
+</resources>

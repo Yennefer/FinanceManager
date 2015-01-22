@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Finance Manager</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="action_add_operations">Добавить</string>
+    <string name="action_statistic">Статистика</string>
+    <string name="action_about">О программе</string>
+    <string name="action_settings">Настройки</string>
+
+    <string name="tvSumLabel">Сумма</string>
+    <string name="tvCategoryLabel">Категория</string>
+    <string name="rbIncomeLabel">Поступление средств</string>
+    <string name="rbOutcomeLabel">Трата средств</string>
+
+    <string name="tvTimeItemLabel">19:45</string>
+    <string name="tvSumItemLabel">+5000 р.</string>
+    <string name="tvDateLabel">08.12.2014</string>
+
+    <string name="ivCategoryContentDescription">CategoryIcon</string>
+
+</resources>

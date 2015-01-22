@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="60dip">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tvSumItemLabel"
+        android:id="@+id/tvSum"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/tvTimeItemLabel"
+        android:id="@+id/tvTime"
+        android:layout_toRightOf="@+id/tvSum"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_marginBottom="15dip" />
+
+    <ImageView
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_marginRight="10dip"
+        android:contentDescription="@string/ivCategoryContentDescription"
+        android:id="@+id/ivCategory"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_launcher"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip">
+    </ImageView>
+</RelativeLayout>
