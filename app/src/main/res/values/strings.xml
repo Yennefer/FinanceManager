@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Finance Manager</string>
+    <string name="app_name">Копилочка</string>
     <string name="hello_world">Hello world!</string>
 
     <string name="action_add_operations">Добавить</string>
@@ -19,5 +19,7 @@
     <string name="tvDateLabel">08.12.2014</string>
 
     <string name="ivCategoryContentDescription">CategoryIcon</string>
+
+    <string name="log_tag">myLog</string>
 
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.yennefer.financemanager" >
+    package="com.example.yennefer.financemanager">
 
     <application
         android:allowBackup="true"
@@ -15,19 +15,12 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:icon="@drawable/apple">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".OperationActivity"
-            android:label="@string/action_add_operations" >
-        </activity>
-        <activity
-            android:name=".StatisticActivity"
-            android:label="@string/action_statistic" >
         </activity>
     </application>
 
