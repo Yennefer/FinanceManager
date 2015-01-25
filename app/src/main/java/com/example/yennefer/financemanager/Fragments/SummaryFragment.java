@@ -5,7 +5,7 @@ import android.support.v4.app.ListFragment;
 
 import com.example.yennefer.financemanager.FinanceManagerClasses.Operation;
 import com.example.yennefer.financemanager.R;
-import com.example.yennefer.financemanager.SummaryAdapter;
+import com.example.yennefer.financemanager.Content.SummaryAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

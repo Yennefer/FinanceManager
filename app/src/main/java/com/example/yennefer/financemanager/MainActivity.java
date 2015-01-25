@@ -33,32 +33,6 @@ public class MainActivity extends ActionBarActivity {
     // Action bar
     private ActionBar actionBar;
 
-    // Setting default database
-    private void setDefaultData() {
-
-        List<Category> categories = Category.listAll(Category.class);
-        List<Source> sources = Source.listAll(Source.class);
-
-        // If category table is empty, fill it with default categories
-        if (categories.isEmpty()) {
-            Category category;
-            category = new Category("Продукты", R.drawable.chicken);
-            category.save();
-            category = new Category("Транспорт", R.drawable.car);
-            category.save();
-            category = new Category("Развлечения", R.drawable.bowling);
-            category.save();
-        }
-
-        // If source table is empty, fill it with default sources
-        if (sources.isEmpty()) {
-            Source source;
-            source = new Source("Зарплата", R.drawable.creditcard);
-            source.save();
-        }
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

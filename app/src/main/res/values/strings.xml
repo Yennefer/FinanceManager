@@ -21,5 +21,7 @@
     <string name="ivCategoryContentDescription">CategoryIcon</string>
 
     <string name="log_tag">myLog</string>
+    <string name="income_type">income</string>
+    <string name="outcome_type">outcome</string>
 
 </resources>
