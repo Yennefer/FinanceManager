@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import com.example.yennefer.financemanager.R;
 
 /**
- * Created by Yennefer on 21.01.2015.
+ * Created by Yennefer on 25.01.2015.
+ * Fragment with statistic info
  */
 public class StatisticFragment extends Fragment {
 

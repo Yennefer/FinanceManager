@@ -5,28 +5,17 @@ import com.orm.SugarRecord;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Created by Yennefer on 25.01.2015.
+ * Finance operation
+ */
 public class Operation extends SugarRecord<Operation> {
 
     private String sum;
 
-    private String type;
-
-    private int date;
-
     private Category category;
 
-    private Source source;
-
-    public Operation() {
-    }
-
-    public Operation(String sum, String type, int date, Category category, Source source) {
-        this.sum = sum;
-        this.date = date;
-        this.type = type;
-        this.category = category;
-        this.source = source;
-    }
+    private int date;
 
     public String getSum() {
         return sum;
@@ -34,14 +23,6 @@ public class Operation extends SugarRecord<Operation> {
 
     public void setSum(String sum) {
         this.sum = sum;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Category getCategory() {
@@ -52,16 +33,21 @@ public class Operation extends SugarRecord<Operation> {
         this.category = category;
     }
 
-    public Source getSource() {
-        return source;
-    }
-
-    public void setSource(Source source) {
-        this.source = source;
-    }
-
     public int getDate() {
         return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public Operation() {
+    }
+
+    public Operation(String sum, Category category, int date) {
+        this.sum = sum;
+        this.category = category;
+        this.date = date;
     }
 
     public String getDateAsString() {
@@ -75,9 +61,4 @@ public class Operation extends SugarRecord<Operation> {
                 .format(new Date(date * 1000L));
         return timeAsText;
     }
-
-    public void setDate(int date) {
-        this.date = date;
-    }
-
 }

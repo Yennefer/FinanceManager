@@ -2,22 +2,19 @@ package com.example.yennefer.financemanager.FinanceManagerClasses;
 
 import com.orm.SugarRecord;
 
+/**
+ * Created by Yennefer on 25.01.2015.
+ * Category of operation
+ */
 public class Category extends SugarRecord<Category> {
 
     private String name;
 
-    private int image;
+    private String image;
 
-    private int is_used;
+    private Type type;
 
-    public Category() {
-    }
-
-    public Category(String name, int image) {
-        this.name = name;
-        this.image = image;
-        this.is_used = 1;
-    }
+    private int isUsed;
 
     public String getName() {
         return name;
@@ -27,19 +24,38 @@ public class Category extends SugarRecord<Category> {
         this.name = name;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    public int getIs_used() {
-        return is_used;
+    public Type getType() {
+        return type;
     }
 
-    public void setIs_used(int is_used) {
-        this.is_used = is_used;
+    public void setType(Type type) {
+        this.type = type;
     }
+
+    public int getIsUsed() {
+        return isUsed;
+    }
+
+    public void setIsUsed(int is_used) {
+        this.isUsed = is_used;
+    }
+
+    public Category() {
+    }
+
+    public Category(String name, String image, Type type) {
+        this.name = name;
+        this.image = image;
+        this.type = type;
+        this.isUsed = 1;
+    }
+
 }

@@ -5,7 +5,7 @@ import android.support.v4.app.ListFragment;
 
 import com.example.yennefer.financemanager.FinanceManagerClasses.Operation;
 import com.example.yennefer.financemanager.R;
-import com.example.yennefer.financemanager.Content.SummaryAdapter;
+import com.example.yennefer.financemanager.SummaryAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,28 +13,21 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Yennefer on 19.01.2015.
+ * Created by Yennefer on 25.01.2015.
+ * Fragment with list of resent operations
  */
 public class SummaryFragment extends ListFragment {
-
-    // Map attribute names
-    private final String ATTRIBUTE_SUM = "sum";
-    private final String ATTRIBUTE_TIME = "time";
-    private final String ATTRIBUTE_CATEGORY = "categoryIcon";
-
-    // Names of operation types
-    private final String INCOME_TYPE = "income";
-    private final String OUTCOME_TYPE = "outcome";
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setSummaryAdapter();
+        final String ATTRIBUTE_SUM = getResources().getString(R.string.attribute_sum);
+        final String ATTRIBUTE_TIME = getResources().getString(R.string.attribute_time);
+        final String ATTRIBUTE_CATEGORY = getResources().getString(R.string.attribute_category);
 
-    }
-
-    private void setSummaryAdapter() {
+        final String OUTCOME_TYPE = getResources().getString(R.string.outcome_type);
+        final String INCOME_TYPE = getResources().getString(R.string.income_type);
 
         // Creating operations list
         List<Operation> operations = Operation.find(Operation.class, null, null, null, "id DESC", "50");
@@ -45,34 +38,29 @@ public class SummaryFragment extends ListFragment {
 
         for (int i = 0; i < operations.size(); i++) {
             Operation currentOperation = operations.get(i);
+            String currentOperationType = currentOperation.getCategory().getType().getName();
             m = new HashMap<String, Object>();
             m.put(ATTRIBUTE_SUM, currentOperation.getSum());
             m.put(ATTRIBUTE_TIME, currentOperation.getTimeAsString());
 
-            switch (currentOperation.getType()) {
-                case OUTCOME_TYPE:
-                    m.put(ATTRIBUTE_CATEGORY, currentOperation.getCategory().getImage());
-                    break;
-                case INCOME_TYPE:
-                    m.put(ATTRIBUTE_CATEGORY, currentOperation.getSource().getImage());
-                    break;
-                default:
-                    break;
+            if (currentOperationType == OUTCOME_TYPE) {
+                m.put(ATTRIBUTE_CATEGORY, currentOperation.getCategory().getImage());
             }
-
+            else if (currentOperationType == INCOME_TYPE) {
+                m.put(ATTRIBUTE_CATEGORY, currentOperation.getCategory().getImage());
+            }
             data.add(m);
         }
 
-        // массив имен атрибутов, из которых будут читаться данные
-        String[] from = {ATTRIBUTE_SUM, ATTRIBUTE_TIME, ATTRIBUTE_CATEGORY};
-
-        // массив ID View-компонентов, в которые будут вставлять данные
+        // Array of attributes
+        String[] from = { ATTRIBUTE_SUM, ATTRIBUTE_TIME, ATTRIBUTE_CATEGORY };
+        // Array of views
         int[] to = {R.id.tvSum, R.id.tvTime, R.id.ivCategory};
 
-        // Creating adapter
+        // Create adapter
         SummaryAdapter sAdapter = new SummaryAdapter(getActivity(), data, R.layout.list_item, from, to);
 
-        // Assignment adapter to list
+        // Assign adapter to list
         setListAdapter(sAdapter);
     }
 

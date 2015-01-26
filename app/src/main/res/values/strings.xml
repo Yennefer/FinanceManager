@@ -23,5 +23,8 @@
     <string name="log_tag">myLog</string>
     <string name="income_type">income</string>
     <string name="outcome_type">outcome</string>
+    <string name="attribute_sum">sum</string>
+    <string name="attribute_time">time</string>
+    <string name="attribute_category">category</string>
 
 </resources>

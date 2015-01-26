@@ -15,12 +15,16 @@ import android.widget.Toast;
 
 import com.example.yennefer.financemanager.FinanceManagerClasses.Category;
 import com.example.yennefer.financemanager.FinanceManagerClasses.Operation;
-import com.example.yennefer.financemanager.FinanceManagerClasses.Source;
 import com.example.yennefer.financemanager.R;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Yennefer on 25.01.2015.
+ * Fragment for adding and editing operations
+ */
 public class EditOperationFragment extends Fragment {
 
     // Views
@@ -29,20 +33,30 @@ public class EditOperationFragment extends Fragment {
     RadioButton rbOutcome, rbIncome;
     Spinner spCategory;
 
-    private String[] categoryNames;
-    private String[] sourceNames;
+    private String[] incomeCategoryNames;
+    private String[] outcomeCategoryNames;
 
-    // Names of operation types
-    private static final String INCOME_TYPE = "income";
-    private static final String OUTCOME_TYPE = "outcome";
+    private String INCOME_TYPE;
+    private String OUTCOME_TYPE;
 
     // Updating spinner
     private void setSpinner(String[] items) {
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, items);
 
         spCategory.setAdapter(adapter);
         spCategory.setSelection(0);
+
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // Names of operation types
+        INCOME_TYPE = getResources().getString(R.string.income_type);
+        OUTCOME_TYPE = getResources().getString(R.string.outcome_type);
 
     }
 
@@ -62,18 +76,33 @@ public class EditOperationFragment extends Fragment {
         rbOutcome.setOnClickListener(clickListener);
         rbIncome.setOnClickListener(clickListener);
 
-        // Creating lists of category and source names
+        // Create lists of income and outcome categories
         List<Category> categories = Category.listAll(Category.class);
-        List<Source> sources = Source.listAll(Source.class);
+        ArrayList<Category> incomeCategories = new ArrayList<Category>();
+        ArrayList<Category> outcomeCategories = new ArrayList<Category>();
 
-        categoryNames = new String[categories.size()];
-        sourceNames = new String[sources.size()];
+        for (int i = 0; i < categories.size(); i++) {
+            Category currCategory = categories.get(i);
+            if (currCategory.getType().getName() == OUTCOME_TYPE) {
+                outcomeCategories.add(currCategory);
+            } else if (currCategory.getType().getName() == INCOME_TYPE) {
+                incomeCategories.add(currCategory);
+            }
+        }
 
-        for (int i = 0; i < categories.size(); i++) categoryNames[i] = categories.get(i).getName();
-        for (int i = 0; i < sources.size(); i++) sourceNames[i] = sources.get(i).getName();
+        outcomeCategoryNames = new String[outcomeCategories.size()];
+        incomeCategoryNames = new String[incomeCategories.size()];
+
+        for (int i = 0; i < outcomeCategories.size(); i++) {
+            outcomeCategoryNames[i] = outcomeCategories.get(i).getName();
+        }
+
+        for (int i = 0; i < incomeCategories.size(); i++) {
+            incomeCategoryNames[i] = incomeCategories.get(i).getName();
+        }
 
         // Putting category names in spinner
-        setSpinner(categoryNames);
+        setSpinner(outcomeCategoryNames);
 
         return v;
     }
@@ -83,37 +112,31 @@ public class EditOperationFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.rbOutcome:
-                    // Putting category names in spinner
-                    setSpinner(categoryNames);
+                    // Putting outcome category names in spinner
+                    setSpinner(outcomeCategoryNames);
                     break;
                 case R.id.rbIncome:
-                    // Putting source names in spinner
-                    setSpinner(sourceNames);
+                    // Putting income category names in spinner
+                    setSpinner(incomeCategoryNames);
                     break;
                 case R.id.btnSave:
                     if (etSum.getText().length() != 0) {
-                        // Saving operation in database
-                        String sum;
-                        String type;
-                        Category category = null;
-                        Source source = null;
 
+                        // Get sum
                         BigDecimal money = new BigDecimal(etSum.getText().toString()).setScale(2, BigDecimal.ROUND_HALF_EVEN);
-                        sum = money.toString();
+                        String sum = money.toString();
+                        if (rbOutcome.isChecked()) { sum = "-" + sum; }
+                        else if (rbIncome.isChecked()) { sum = "+" + sum; }
 
+                        // Get date
                         int date = (int) (System.currentTimeMillis() / 1000);
 
-                        if (rbOutcome.isChecked()) {
-                            category = Category.find(Category.class, "name = ?", spCategory.getSelectedItem().toString()).get(0);
-                            type = OUTCOME_TYPE;
-                            sum = "-" + sum;
-                        }
-                        else {
-                            source = Source.find(Source.class, "name = ?", spCategory.getSelectedItem().toString()).get(0);
-                            type = INCOME_TYPE;
-                            sum = "+" + sum;
-                        }
-                        Operation operation = new Operation(sum, type, date, category, source);
+                        // Get category
+                        Category category = Category.find(Category.class, "name = ?",
+                                spCategory.getSelectedItem().toString()).get(0);
+
+                        // Save operation
+                        Operation operation = new Operation(sum, category, date);
                         operation.save();
 
                     }

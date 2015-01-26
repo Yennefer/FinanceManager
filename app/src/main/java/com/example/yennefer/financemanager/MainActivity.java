@@ -5,20 +5,19 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.yennefer.financemanager.FinanceManagerClasses.Category;
-import com.example.yennefer.financemanager.FinanceManagerClasses.Source;
 import com.example.yennefer.financemanager.Fragments.AboutFragment;
 import com.example.yennefer.financemanager.Fragments.EditOperationFragment;
 import com.example.yennefer.financemanager.Fragments.SettingsFragment;
 import com.example.yennefer.financemanager.Fragments.StatisticFragment;
 import com.example.yennefer.financemanager.Fragments.SummaryFragment;
 
-import java.util.List;
-
+/**
+ * Created by Yennefer on 25.01.2015.
+ * Main activity with fragments container
+ */
 public class MainActivity extends ActionBarActivity {
 
     // Fragments manager
@@ -38,14 +37,16 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        // Create fragment manager
+        // Get fragment manager
         myFragmentManager = getSupportFragmentManager();
         // Create fragments
         summaryFragment = new SummaryFragment();
         editOperationFragment = new EditOperationFragment();
         statisticFragment = new StatisticFragment();
+        aboutFragment = new AboutFragment();
+        settingsFragment = new SettingsFragment();
 
-        // Get action bar
+        // Get action bar and set home button
         actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setIcon(R.drawable.apple);
@@ -73,7 +74,6 @@ public class MainActivity extends ActionBarActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                Log.d(getResources().getString(R.string.log_tag), "GoHome");
                 fragmentTransaction.replace(R.id.container, summaryFragment);
                 fragmentTransaction.commit();
                 actionBar.setDisplayHomeAsUpEnabled(false);
@@ -91,12 +91,10 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_about:
                 fragmentTransaction.replace(R.id.container, aboutFragment);
                 fragmentTransaction.commit();
-                fragmentTransaction.commit();
                 actionBar.setDisplayHomeAsUpEnabled(true);
                 break;
             case R.id.action_settings:
                 fragmentTransaction.replace(R.id.container, settingsFragment);
-                fragmentTransaction.commit();
                 fragmentTransaction.commit();
                 actionBar.setDisplayHomeAsUpEnabled(true);
                 break;
