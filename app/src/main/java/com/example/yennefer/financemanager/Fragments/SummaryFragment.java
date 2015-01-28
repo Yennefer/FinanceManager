@@ -1,9 +1,9 @@
-package com.example.yennefer.financemanager.Fragments;
+package com.example.yennefer.financemanager.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 
-import com.example.yennefer.financemanager.FinanceManagerClasses.Operation;
+import com.example.yennefer.financemanager.model.Operation;
 import com.example.yennefer.financemanager.R;
 import com.example.yennefer.financemanager.SummaryAdapter;
 

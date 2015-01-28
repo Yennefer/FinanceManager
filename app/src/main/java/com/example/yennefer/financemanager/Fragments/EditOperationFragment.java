@@ -1,4 +1,4 @@
-package com.example.yennefer.financemanager.Fragments;
+package com.example.yennefer.financemanager.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,8 +13,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.yennefer.financemanager.FinanceManagerClasses.Category;
-import com.example.yennefer.financemanager.FinanceManagerClasses.Operation;
+import com.example.yennefer.financemanager.model.Category;
+import com.example.yennefer.financemanager.model.Operation;
 import com.example.yennefer.financemanager.R;
 
 import java.math.BigDecimal;

@@ -8,11 +8,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.yennefer.financemanager.Fragments.AboutFragment;
-import com.example.yennefer.financemanager.Fragments.EditOperationFragment;
-import com.example.yennefer.financemanager.Fragments.SettingsFragment;
-import com.example.yennefer.financemanager.Fragments.StatisticFragment;
-import com.example.yennefer.financemanager.Fragments.SummaryFragment;
+import com.example.yennefer.financemanager.fragments.AboutFragment;
+import com.example.yennefer.financemanager.fragments.EditOperationFragment;
+import com.example.yennefer.financemanager.fragments.SettingsFragment;
+import com.example.yennefer.financemanager.fragments.StatisticFragment;
+import com.example.yennefer.financemanager.fragments.SummaryFragment;
 
 /**
  * Created by Yennefer on 25.01.2015.

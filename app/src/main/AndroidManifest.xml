@@ -6,17 +6,11 @@
         android:allowBackup="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
         android:label="@string/app_name"
-        android:name="com.orm.SugarApp">
-
-        <meta-data android:name="DATABASE" android:value="finance_manager.db" />
-        <meta-data android:name="VERSION" android:value="1" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.example.yennefer.financemanager" />
+        android:icon="@drawable/apple">
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:icon="@drawable/apple">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

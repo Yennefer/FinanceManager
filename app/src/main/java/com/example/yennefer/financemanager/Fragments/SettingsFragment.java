@@ -1,4 +1,4 @@
-package com.example.yennefer.financemanager.Fragments;
+package com.example.yennefer.financemanager.fragments;
 
 import android.os.Bundle;
 import android.support.v4.preference.PreferenceFragment;

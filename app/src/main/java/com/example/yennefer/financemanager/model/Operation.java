@@ -1,6 +1,7 @@
-package com.example.yennefer.financemanager.FinanceManagerClasses;
+package com.example.yennefer.financemanager.model;
 
-import com.orm.SugarRecord;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,13 +10,29 @@ import java.util.Date;
  * Created by Yennefer on 25.01.2015.
  * Finance operation
  */
-public class Operation extends SugarRecord<Operation> {
 
+@DatabaseTable(tableName = "types")
+public class Operation {
+
+    @DatabaseField(generatedId = true)
+    private int id;
+
+    @DatabaseField(canBeNull = false)
     private String sum;
 
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Category category;
 
+    @DatabaseField(canBeNull = false)
     private int date;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getSum() {
         return sum;
@@ -42,12 +59,6 @@ public class Operation extends SugarRecord<Operation> {
     }
 
     public Operation() {
-    }
-
-    public Operation(String sum, Category category, int date) {
-        this.sum = sum;
-        this.category = category;
-        this.date = date;
     }
 
     public String getDateAsString() {
