@@ -35,7 +35,7 @@ public class Type {
     }
 
     public List<Category> getCategories() {
-        ArrayList<Category> categoriesList = new ArrayList<Category>();
+        ArrayList<Category> categoriesList = new ArrayList<>();
         for (Category category : categories) {
             categoriesList.add(category);
         }
@@ -43,6 +43,10 @@ public class Type {
     }
 
     public Type() {
+    }
+
+    public Type(String name) {
+        this.name = name;
     }
 
 }

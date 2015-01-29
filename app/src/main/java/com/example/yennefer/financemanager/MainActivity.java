@@ -18,6 +18,7 @@ import com.example.yennefer.financemanager.fragments.SummaryFragment;
  * Created by Yennefer on 25.01.2015.
  * Main activity with fragments container
  */
+
 public class MainActivity extends ActionBarActivity {
 
     // Fragments manager

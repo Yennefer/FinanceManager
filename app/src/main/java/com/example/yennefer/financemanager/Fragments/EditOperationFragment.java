@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.yennefer.financemanager.db.DatabaseManager;
 import com.example.yennefer.financemanager.model.Category;
 import com.example.yennefer.financemanager.model.Operation;
 import com.example.yennefer.financemanager.R;
@@ -25,6 +26,7 @@ import java.util.List;
  * Created by Yennefer on 25.01.2015.
  * Fragment for adding and editing operations
  */
+
 public class EditOperationFragment extends Fragment {
 
     // Views
@@ -63,7 +65,7 @@ public class EditOperationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.edit_operation_fragment, null);
+        View v = inflater.inflate(R.layout.fr_edit_operation, null);
 
         // Finding all Views
         btnSave = (Button) v.findViewById(R.id.btnSave);
@@ -77,7 +79,7 @@ public class EditOperationFragment extends Fragment {
         rbIncome.setOnClickListener(clickListener);
 
         // Create lists of income and outcome categories
-        List<Category> categories = Category.listAll(Category.class);
+        List<Category> categories = DatabaseManager.getInstance().getAllCategories();
         ArrayList<Category> incomeCategories = new ArrayList<Category>();
         ArrayList<Category> outcomeCategories = new ArrayList<Category>();
 

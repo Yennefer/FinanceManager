@@ -55,7 +55,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
-            List<String> allSql = new ArrayList<String>();
+            List<String> allSql = new ArrayList<>();
             switch(oldVersion)
             {
                 case 1:

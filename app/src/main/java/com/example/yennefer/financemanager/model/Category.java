@@ -75,7 +75,7 @@ public class Category {
     }
 
     public List<Operation> getOperations() {
-        ArrayList<Operation> operationList = new ArrayList<Operation>();
+        ArrayList<Operation> operationList = new ArrayList<>();
         for (Operation operation : operations) {
             operationList.add(operation);
         }
@@ -89,4 +89,11 @@ public class Category {
     public Category() {
     }
 
+    public Category(int id, String name, String image, Type type, int isUsed) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.type = type;
+        this.isUsed = isUsed;
+    }
 }

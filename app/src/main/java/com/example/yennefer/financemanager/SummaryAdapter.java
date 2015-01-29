@@ -1,14 +1,14 @@
 package com.example.yennefer.financemanager;
 
 import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.example.yennefer.financemanager.R;
-
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -16,13 +16,16 @@ import java.util.Map;
  * Created by Yennefer on 25.01.2015.
  * Adapter for list in SummaryFragment
  */
+
 public class SummaryAdapter extends SimpleAdapter {
 
     private Context myContext;
 
+/*
     public static final int ITEM_VIEW_TYPE = 0;    // элемент списка - пункт
     public static final int SECTION_VIEW_TYPE = 1; // элемент списка - заголовок
     public static final int VIEW_TYPES_COUNT = 2;  // количество типов элементов списка
+*/
 
     public SummaryAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to) {
         super(context, data, resource, from, to);
@@ -59,13 +62,11 @@ public class SummaryAdapter extends SimpleAdapter {
     }*/
 
     @Override
-    public void setViewText(TextView v, String text) {
-
+    public void setViewText(@NonNull TextView v, String text) {
         if (v.getId() == R.id.tvSum) {
-            // Setting up sum color
+            // Set up sum color
             int positiveColor = myContext.getResources().getColor(R.color.yellow_green);
             int negativeColor = myContext.getResources().getColor(R.color.coral);
-
             if (text.startsWith("+")) {
                 v.setTextColor(positiveColor);
             } else if (text.startsWith("-")) {
@@ -75,8 +76,21 @@ public class SummaryAdapter extends SimpleAdapter {
             // Add ruble abbreviation
             text = text + " р.";
         }
-
         super.setViewText(v, text);
     }
 
+    @Override
+    public void setViewImage(@NonNull ImageView v, String value) {
+        try {
+            // Get input stream
+            InputStream inputStream = myContext.getAssets().open(value);
+            // Load image as Drawable
+            Drawable drawable = Drawable.createFromStream(inputStream, null);
+            // Set image to ImageView
+            v.setImageDrawable(drawable);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

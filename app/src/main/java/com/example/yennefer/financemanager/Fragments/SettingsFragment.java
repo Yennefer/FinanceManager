@@ -9,6 +9,7 @@ import com.example.yennefer.financemanager.R;
  * Created by Yennefer on 25.01.2015.
  * Fragment with preferences
  */
+
 public class SettingsFragment extends PreferenceFragment {
 
     public void onCreate(Bundle savedInstanceState) {

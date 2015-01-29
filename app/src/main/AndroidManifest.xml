@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
         android:label="@string/app_name"
-        android:icon="@drawable/apple">
+        android:icon="@drawable/ic_launcher">
 
         <activity
             android:name=".MainActivity"

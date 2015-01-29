@@ -61,15 +61,18 @@ public class Operation {
     public Operation() {
     }
 
+    public Operation(int id, String sum, Category category, int date) {
+        this.id = id;
+        this.sum = sum;
+        this.category = category;
+        this.date = date;
+    }
+
     public String getDateAsString() {
-        String dateAsText = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-                .format(new Date(date * 1000L));
-        return dateAsText;
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date * 1000L));
     }
 
     public String getTimeAsString() {
-        String timeAsText = new SimpleDateFormat("HH:mm")
-                .format(new Date(date * 1000L));
-        return timeAsText;
+        return new SimpleDateFormat("HH:mm").format(new Date(date * 1000L));
     }
 }

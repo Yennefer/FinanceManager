@@ -12,11 +12,12 @@ import com.example.yennefer.financemanager.R;
  * Created by Yennefer on 25.01.2015.
  * Fragment with statistic info
  */
+
 public class StatisticFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.statistic_fragment, null);
+        return inflater.inflate(R.layout.fr_statistic, null);
 
     }
 
