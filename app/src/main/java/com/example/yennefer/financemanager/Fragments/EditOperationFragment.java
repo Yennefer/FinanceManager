@@ -1,10 +1,11 @@
-package com.example.yennefer.financemanager.fragments;
+package com.example.yennefer.financemanager.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,10 +16,8 @@ import android.widget.Toast;
 
 import com.example.yennefer.financemanager.db.DatabaseManager;
 import com.example.yennefer.financemanager.model.Category;
-import com.example.yennefer.financemanager.model.Operation;
 import com.example.yennefer.financemanager.R;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +49,11 @@ public class EditOperationFragment extends Fragment {
         spCategory.setAdapter(adapter);
         spCategory.setSelection(0);
 
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -109,7 +113,7 @@ public class EditOperationFragment extends Fragment {
         return v;
     }
 
-    OnClickListener clickListener = new OnClickListener() {
+    View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -124,7 +128,7 @@ public class EditOperationFragment extends Fragment {
                 case R.id.btnSave:
                     if (etSum.getText().length() != 0) {
 
-                        // Get sum
+/*                        // Get sum
                         BigDecimal money = new BigDecimal(etSum.getText().toString()).setScale(2, BigDecimal.ROUND_HALF_EVEN);
                         String sum = money.toString();
                         if (rbOutcome.isChecked()) { sum = "-" + sum; }
@@ -139,7 +143,7 @@ public class EditOperationFragment extends Fragment {
 
                         // Save operation
                         Operation operation = new Operation(sum, category, date);
-                        operation.save();
+                        operation.save();*/
 
                     }
                     else {
@@ -152,5 +156,15 @@ public class EditOperationFragment extends Fragment {
 
         }
     };
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.items, menu);
+
+        menu.setGroupVisible(R.id.add_menu_group, false);
+        menu.setGroupVisible(R.id.statistic_menu_group, false);
+        menu.setGroupVisible(R.id.hide_menu_group, false);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
 }

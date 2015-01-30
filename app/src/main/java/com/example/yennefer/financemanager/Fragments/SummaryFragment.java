@@ -1,7 +1,10 @@
-package com.example.yennefer.financemanager.fragments;
+package com.example.yennefer.financemanager.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.yennefer.financemanager.db.DatabaseManager;
 import com.example.yennefer.financemanager.model.Operation;
@@ -19,6 +22,11 @@ import java.util.Map;
  */
 
 public class SummaryFragment extends ListFragment {
+
+    public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -53,5 +61,15 @@ public class SummaryFragment extends ListFragment {
 
         // Assign adapter to list
         setListAdapter(sAdapter);
+    }
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.items, menu);
+
+        menu.setGroupVisible(R.id.add_menu_group, true);
+        menu.setGroupVisible(R.id.statistic_menu_group, true);
+        menu.setGroupVisible(R.id.hide_menu_group, true);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

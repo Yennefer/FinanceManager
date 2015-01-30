@@ -103,5 +103,4 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return typeDao;
     }
-
 }
