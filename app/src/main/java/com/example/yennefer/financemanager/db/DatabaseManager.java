@@ -16,7 +16,6 @@ import java.util.List;
 public class DatabaseManager {
 
     static private DatabaseManager instance;
-    private List<Category> allCategories;
 
     static public void init(Context ctx) {
         if (null==instance) {
@@ -37,6 +36,8 @@ public class DatabaseManager {
         return helper;
     }
 
+    /* My custom queries: */
+
     public List<Operation> getAllOperations() {
         List<Operation> operations = null;
         try {
@@ -56,4 +57,31 @@ public class DatabaseManager {
         }
         return categories;
     }
+
+    public Category getCategoryWithName(String categoryName) {
+        Category category = null;
+        try {
+            category = getHelper().getCategoryDao().queryForId(categoryName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
+    }
+
+    public void addOperation(Operation operation) {
+        try {
+            getHelper().getOperationDao().create(operation);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateOperation(Operation operation) {
+        try {
+            getHelper().getOperationDao().update(operation);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

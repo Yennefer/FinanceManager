@@ -5,6 +5,8 @@
     <string name="hello_world">Hello world!</string>
 
     <string name="action_add_operations">Добавить</string>
+    <string name="action_edit_operation">Редактировать</string>
+    <string name="action_delete_operation">Удалить</string>
     <string name="action_statistic">Статистика</string>
     <string name="action_about">О программе</string>
     <string name="action_settings">Настройки</string>
@@ -21,10 +23,10 @@
     <string name="ivCategoryContentDescription">CategoryIcon</string>
 
     <string name="log_tag">myLog</string>
-    <string name="income_type">income</string>
-    <string name="outcome_type">outcome</string>
+
     <string name="attribute_sum">sum</string>
     <string name="attribute_time">time</string>
     <string name="attribute_category">category</string>
+
 
 </resources>

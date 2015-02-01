@@ -11,7 +11,7 @@ import java.util.Date;
  * Finance operation
  */
 
-@DatabaseTable(tableName = "types")
+@DatabaseTable(tableName = "operations")
 public class Operation {
 
     @DatabaseField(generatedId = true)
@@ -61,8 +61,7 @@ public class Operation {
     public Operation() {
     }
 
-    public Operation(int id, String sum, Category category, int date) {
-        this.id = id;
+    public Operation(String sum, Category category, int date) {
         this.sum = sum;
         this.category = category;
         this.date = date;

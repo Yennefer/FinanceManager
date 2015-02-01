@@ -5,6 +5,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.yennefer.financemanager.CategoryType;
 import com.example.yennefer.financemanager.model.Category;
 import com.example.yennefer.financemanager.model.Operation;
 import com.example.yennefer.financemanager.model.Type;
@@ -30,9 +31,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // the DAO objects needed to access the SimpleData table
-    private Dao<Category, Integer> categoryDao = null;
+    private Dao<Category, String> categoryDao = null;
     private Dao<Operation, Integer> operationDao = null;
-    private Dao<Type, Integer> typeDao = null;
+    private Dao<Type, String> typeDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,9 +42,23 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
+            TableUtils.createTable(connectionSource, Type.class);
             TableUtils.createTable(connectionSource, Category.class);
             TableUtils.createTable(connectionSource, Operation.class);
-            TableUtils.createTable(connectionSource, Type.class);
+
+            List<String> queries = new ArrayList<>();
+            queries.add("INSERT INTO Types (name) VALUES (\"" + CategoryType.OUTCOME.toString() + "\");");
+            queries.add("INSERT INTO Types (name) VALUES (\"" + CategoryType.INCOME.toString() + "\");");
+            queries.add("INSERT INTO Categories (name, image, type_id, is_used) VALUES (\"продукты\", \"apple.png\", \"" +
+                    CategoryType.OUTCOME.toString() + "\", 1);");
+            queries.add("INSERT INTO Categories (name, image, type_id, is_used) VALUES (\"развлечения\", \"bowling.png\", \"" +
+                    CategoryType.OUTCOME.toString() + "\", 1);");
+            queries.add("INSERT INTO Categories (name, image, type_id, is_used) VALUES (\"зарплата\", \"creditcard.png\", \"" +
+                    CategoryType.INCOME.toString() + "\", 1);");
+            for (String sql : queries) {
+                database.execSQL(sql);
+            }
+
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -59,8 +74,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             switch(oldVersion)
             {
                 case 1:
-                    //allSql.add("alter table AdData add column `new_col` VARCHAR");
-                    //allSql.add("alter table AdData add column `new_col2` VARCHAR");
+                    //allSql.add("INSERT INTO Types (name) VALUES ();");
+                    //allSql.add("INSERT INTO Categories () VALUES ();");
             }
             for (String sql : allSql) {
                 database.execSQL(sql);
@@ -71,7 +86,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
-    public Dao<Category, Integer> getCategoryDao() {
+    public Dao<Type, String> getTypeDao() {
+        if (null == typeDao) {
+            try {
+                typeDao = getDao(Type.class);
+            }catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return typeDao;
+    }
+
+    public Dao<Category, String> getCategoryDao() {
         if (null == categoryDao) {
             try {
                 categoryDao = getDao(Category.class);
@@ -93,14 +119,4 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return operationDao;
     }
 
-    public Dao<Type, Integer> getTypeDao() {
-        if (null == typeDao) {
-            try {
-                typeDao = getDao(Type.class);
-            }catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return typeDao;
-    }
 }

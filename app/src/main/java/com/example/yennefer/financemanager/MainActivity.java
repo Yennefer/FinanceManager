@@ -6,11 +6,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.yennefer.financemanager.Fragments.AboutFragment;
-import com.example.yennefer.financemanager.Fragments.EditOperationFragment;
+import com.example.yennefer.financemanager.Fragments.OperationFragment;
 import com.example.yennefer.financemanager.Fragments.SettingsFragment;
 import com.example.yennefer.financemanager.Fragments.StatisticFragment;
 import com.example.yennefer.financemanager.Fragments.SummaryFragment;
@@ -27,26 +28,29 @@ public class MainActivity extends ActionBarActivity {
     private FragmentManager myFragmentManager;
     // Fragments
     private SummaryFragment summaryFragment;
-    private EditOperationFragment editOperationFragment;
+    private OperationFragment operationFragment;
     private StatisticFragment statisticFragment;
     private AboutFragment aboutFragment;
     private SettingsFragment settingsFragment;
 
     // Action bar
     private ActionBar actionBar;
+    // Action mode
+    private ActionMode actionMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        // Get database manager instance
         DatabaseManager.init(this);
 
         // Get fragment manager
         myFragmentManager = getSupportFragmentManager();
         // Create fragments
         summaryFragment = new SummaryFragment();
-        editOperationFragment = new EditOperationFragment();
+        operationFragment = new OperationFragment();
         statisticFragment = new StatisticFragment();
         aboutFragment = new AboutFragment();
         settingsFragment = new SettingsFragment();
@@ -65,13 +69,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.items, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         Fragment currentFragment = null;
@@ -81,7 +78,7 @@ public class MainActivity extends ActionBarActivity {
                 currentFragment = summaryFragment;
                 break;
             case R.id.action_add_operations:
-                currentFragment = editOperationFragment;
+                currentFragment = operationFragment;
                 break;
             case R.id.action_statistic:
                 currentFragment = statisticFragment;

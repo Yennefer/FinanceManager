@@ -16,10 +16,7 @@ import java.util.List;
 @DatabaseTable(tableName = "categories")
 public class Category {
 
-    @DatabaseField(generatedId = true)
-    private int id;
-
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(id = true)
     private String name;
 
     @DatabaseField(canBeNull = false)
@@ -28,19 +25,11 @@ public class Category {
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Type type;
 
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(columnName = "is_used", canBeNull = false)
     private int isUsed;
 
     @ForeignCollectionField
     private ForeignCollection<Operation> operations;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -89,8 +78,7 @@ public class Category {
     public Category() {
     }
 
-    public Category(int id, String name, String image, Type type, int isUsed) {
-        this.id = id;
+    public Category(String name, String image, Type type, int isUsed) {
         this.name = name;
         this.image = image;
         this.type = type;
