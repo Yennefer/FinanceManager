@@ -27,16 +27,15 @@
         android:layout_marginBottom="@dimen/time_text_bottom_margin" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_marginRight="@dimen/image_right_margin"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:contentDescription="@string/ivCategoryContentDescription"
         android:id="@+id/ivCategory"
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_launcher"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/image_vertical_margins"
-        android:layout_marginBottom="@dimen/image_vertical_margins">
+        android:layout_alignParentTop="false"
+        android:layout_alignParentBottom="false"
+        android:layout_marginRight="15dp"
+        android:layout_centerVertical="true">
     </ImageView>
 </RelativeLayout>

@@ -76,6 +76,7 @@ public class SummaryAdapter extends SimpleAdapter {
             // Add ruble abbreviation
             text = text + " р.";
         }
+
         super.setViewText(v, text);
     }
 
@@ -83,7 +84,7 @@ public class SummaryAdapter extends SimpleAdapter {
     public void setViewImage(@NonNull ImageView v, String value) {
         try {
             // Get input stream
-            InputStream inputStream = myContext.getAssets().open(value);
+            InputStream inputStream = myContext.getAssets().open("images/"+value);
             // Load image as Drawable
             Drawable drawable = Drawable.createFromStream(inputStream, null);
             // Set image to ImageView

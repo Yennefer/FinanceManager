@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.yennefer.financemanager.Fragments.AboutFragment;
@@ -94,6 +93,13 @@ public class MainActivity extends ActionBarActivity {
         }
 
         if (currentFragment != null) {
+
+            if (currentFragment == summaryFragment) {
+                actionBar.setDisplayHomeAsUpEnabled(false);
+            } else {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
+
             FragmentTransaction fragmentTransaction = myFragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, currentFragment);
             fragmentTransaction.commit();
