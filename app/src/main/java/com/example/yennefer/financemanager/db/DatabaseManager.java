@@ -3,7 +3,10 @@ package com.example.yennefer.financemanager.db;
 import android.content.Context;
 
 import com.example.yennefer.financemanager.model.Category;
+import com.example.yennefer.financemanager.model.CategoryType;
 import com.example.yennefer.financemanager.model.Operation;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -48,10 +51,36 @@ public class DatabaseManager {
         return operations;
     }
 
+    public List<Operation> getSummaryOperations() {
+        List<Operation> operations = null;
+        QueryBuilder<Operation, Integer> queryBuilder =
+                getHelper().getOperationDao().queryBuilder().orderBy("id", false);
+        try {
+            PreparedQuery<Operation> preparedQuery = queryBuilder.prepare();
+            operations = getHelper().getOperationDao().query(preparedQuery);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return operations;
+    }
+
     public List<Category> getAllCategories() {
         List<Category> categories = null;
         try {
             categories = getHelper().getCategoryDao().queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categories;
+    }
+
+    public List<Category> getCategoriesWithType(CategoryType type) {
+        List<Category> categories = null;
+        try {
+            QueryBuilder<Category, String> queryBuilder = getHelper().getCategoryDao().queryBuilder();
+            queryBuilder.where().eq("type", type.toString());
+            PreparedQuery<Category> preparedQuery = queryBuilder.prepare();
+            categories = getHelper().getCategoryDao().query(preparedQuery);
         } catch (SQLException e) {
             e.printStackTrace();
         }

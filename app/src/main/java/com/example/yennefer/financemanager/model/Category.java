@@ -22,8 +22,8 @@ public class Category {
     @DatabaseField(canBeNull = false)
     private String image;
 
-    @DatabaseField(foreign = true, foreignAutoRefresh = true)
-    private Type type;
+    @DatabaseField(canBeNull = false)
+    private String type;
 
     @DatabaseField(columnName = "is_used", canBeNull = false)
     private int isUsed;
@@ -47,11 +47,11 @@ public class Category {
         this.image = image;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -78,7 +78,8 @@ public class Category {
     public Category() {
     }
 
-    public Category(String name, String image, Type type, int isUsed) {
+    public Category(String name, String image, String type, int isUsed) {
+
         this.name = name;
         this.image = image;
         this.type = type;

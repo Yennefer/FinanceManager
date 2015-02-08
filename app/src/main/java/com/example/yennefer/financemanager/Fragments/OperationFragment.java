@@ -12,7 +12,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.yennefer.financemanager.CategoryType;
+import com.example.yennefer.financemanager.model.CategoryType;
 import com.example.yennefer.financemanager.R;
 import com.example.yennefer.financemanager.db.DatabaseManager;
 import com.example.yennefer.financemanager.model.Category;
@@ -57,7 +57,7 @@ public class OperationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fr_operation, null);
+        View v = inflater.inflate(R.layout.fragment_operation, null);
 
         // Find all views
         btnSave = (Button) v.findViewById(R.id.btnSave);
@@ -72,14 +72,11 @@ public class OperationFragment extends Fragment {
         rbIncome.setOnClickListener(clickListener);
 
         // Create lists of income and outcome category names
-        List<Category> categories = DatabaseManager.getInstance().getAllCategories();
-
-        for (Category category : categories) {
-            if (category.getType().getName().equals(CategoryType.OUTCOME.toString())) {
-                outcomeCategoriesNames.add(category.getName());
-            } else if (category.getType().getName().equals(CategoryType.OUTCOME.toString())) {
-                incomeCategoriesNames.add(category.getName());
-            }
+        for (Category category : DatabaseManager.getInstance().getCategoriesWithType(CategoryType.INCOME)) {
+            incomeCategoriesNames.add(category.getName());
+        }
+        for (Category category : DatabaseManager.getInstance().getCategoriesWithType(CategoryType.OUTCOME)) {
+            outcomeCategoriesNames.add(category.getName());
         }
 
         // Putting outcome category names in spinner

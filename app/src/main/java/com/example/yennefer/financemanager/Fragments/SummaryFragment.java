@@ -10,6 +10,7 @@ import com.example.yennefer.financemanager.model.Operation;
 import com.example.yennefer.financemanager.R;
 import com.example.yennefer.financemanager.SummaryAdapter;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,7 @@ public class SummaryFragment extends ListFragment {
         final String ATTRIBUTE_CATEGORY = getResources().getString(R.string.attribute_category);
 
         // Creating operations list
-        List<Operation> operations = DatabaseManager.getInstance().getAllOperations();
+        List<Operation> operations = DatabaseManager.getInstance().getSummaryOperations();
 
         // Preparing operations data
         ArrayList<Map<String, Object>> data = new ArrayList<>(operations.size());

@@ -1,4 +1,4 @@
-package com.example.yennefer.financemanager;
+package com.example.yennefer.financemanager.model;
 
 /**
  * Created by Yennefer on 01.02.2015.

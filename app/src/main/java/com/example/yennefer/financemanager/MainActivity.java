@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.view.MenuItem;
 
-import com.example.yennefer.financemanager.Fragments.AboutFragment;
 import com.example.yennefer.financemanager.Fragments.OperationFragment;
 import com.example.yennefer.financemanager.Fragments.SettingsFragment;
 import com.example.yennefer.financemanager.Fragments.StatisticFragment;
@@ -29,7 +28,6 @@ public class MainActivity extends ActionBarActivity {
     private SummaryFragment summaryFragment;
     private OperationFragment operationFragment;
     private StatisticFragment statisticFragment;
-    private AboutFragment aboutFragment;
     private SettingsFragment settingsFragment;
 
     // Action bar
@@ -40,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.activity_main);
 
         // Get database manager instance
         DatabaseManager.init(this);
@@ -51,17 +49,15 @@ public class MainActivity extends ActionBarActivity {
         summaryFragment = new SummaryFragment();
         operationFragment = new OperationFragment();
         statisticFragment = new StatisticFragment();
-        aboutFragment = new AboutFragment();
         settingsFragment = new SettingsFragment();
 
         // Get action bar and set home button
         actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
 
         // Set fragment on first start
         if (savedInstanceState == null) {
             FragmentTransaction fragmentTransaction = myFragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.container, summaryFragment);
+            fragmentTransaction.replace(R.id.container, summaryFragment);
             fragmentTransaction.commit();
         }
 
@@ -81,9 +77,6 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case R.id.action_statistic:
                 currentFragment = statisticFragment;
-                break;
-            case R.id.action_about:
-                currentFragment = aboutFragment;
                 break;
             case R.id.action_settings:
                 currentFragment = settingsFragment;

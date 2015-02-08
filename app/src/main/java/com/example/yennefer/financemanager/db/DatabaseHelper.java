@@ -5,10 +5,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.yennefer.financemanager.CategoryType;
+import com.example.yennefer.financemanager.model.CategoryType;
 import com.example.yennefer.financemanager.model.Category;
 import com.example.yennefer.financemanager.model.Operation;
-import com.example.yennefer.financemanager.model.Type;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -33,7 +32,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // the DAO objects needed to access the SimpleData table
     private Dao<Category, String> categoryDao = null;
     private Dao<Operation, Integer> operationDao = null;
-    private Dao<Type, String> typeDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,18 +40,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
-            TableUtils.createTable(connectionSource, Type.class);
             TableUtils.createTable(connectionSource, Category.class);
             TableUtils.createTable(connectionSource, Operation.class);
 
             List<String> queries = new ArrayList<>();
-            queries.add("INSERT INTO Types (name) VALUES (\"" + CategoryType.OUTCOME.toString() + "\");");
-            queries.add("INSERT INTO Types (name) VALUES (\"" + CategoryType.INCOME.toString() + "\");");
-            queries.add("INSERT INTO Categories (name, image, type_id, is_used) VALUES (\"продукты\", \"apple.png\", \"" +
+            queries.add("INSERT INTO Categories (name, image, type, is_used) VALUES (\"продукты\", \"apple.png\", \"" +
                     CategoryType.OUTCOME.toString() + "\", 1);");
-            queries.add("INSERT INTO Categories (name, image, type_id, is_used) VALUES (\"развлечения\", \"bowling.png\", \"" +
+            queries.add("INSERT INTO Categories (name, image, type, is_used) VALUES (\"развлечения\", \"bowling.png\", \"" +
                     CategoryType.OUTCOME.toString() + "\", 1);");
-            queries.add("INSERT INTO Categories (name, image, type_id, is_used) VALUES (\"зарплата\", \"creditcard.png\", \"" +
+            queries.add("INSERT INTO Categories (name, image, type, is_used) VALUES (\"зарплата\", \"creditcard.png\", \"" +
                     CategoryType.INCOME.toString() + "\", 1);");
             for (String sql : queries) {
                 database.execSQL(sql);
@@ -84,17 +79,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Log.e(DatabaseHelper.class.getName(), "exception during onUpgrade", e);
             throw new RuntimeException(e);
         }
-    }
-
-    public Dao<Type, String> getTypeDao() {
-        if (null == typeDao) {
-            try {
-                typeDao = getDao(Type.class);
-            }catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return typeDao;
     }
 
     public Dao<Category, String> getCategoryDao() {
